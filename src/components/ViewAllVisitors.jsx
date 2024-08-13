@@ -1,7 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
+import axios from 'axios'
 
 const ViewAllVisitors = () => {
+    const [data, changeData] = useState([ ])
+    const fetchData=()=>{
+    axios.get("http://172.16.12.153:4000/getvistors").then(
+        (response)=>{
+            changeData(response.data)
+        }
+    ).catch()
+
+    }
+    useEffect(()=>{fetchData()},[])
   return (
     <div>
         <Navbar/>
@@ -18,21 +29,23 @@ const ViewAllVisitors = () => {
       <th scope="col">Date</th>
     </tr>
   </thead>
+  
   <tbody>
-    <tr>
-      <th scope="row">Rahul</th>
-      <td>Raj</td>
-      <td>Enquiry</td>
-      <td>David</td>
-      <td>27-10-2024</td>
-    </tr>
-    <tr>
-      <th scope="row">Ebin</th>
-      <td>Jacob</td>
-      <td>Enquiry</td>
-      <td>Priya</td>
-      <td>04-07-2024</td>
-    </tr>
+{data.map(
+    (value,index)=>{
+        return  <tr>
+        <td>{value.firstname}</td>
+        <td>{value.lastname}</td>
+        <td>{value.purpose}</td>
+        <td>{value.whomToMeet}</td>
+        <td>{value.date}</td>
+      </tr>
+    }
+)
+}
+
+
+   
   </tbody>
 </table>
                 </div>
