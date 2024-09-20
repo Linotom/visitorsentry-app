@@ -5,11 +5,16 @@ import axios from 'axios'
 const ViewAllVisitors = () => {
     const [data, changeData] = useState([ ])
     const fetchData=()=>{
-    axios.get("http://172.16.12.153:4000/getvistors").then(
+    axios.get("http://35.170.103.9:4057/getvistors").then(
         (response)=>{
             changeData(response.data)
         }
-    ).catch()
+    ).catch(
+      (error)=>{
+        console.log(error.message)
+          alert(error.message)
+      }
+      )
 
     }
     useEffect(()=>{fetchData()},[])

@@ -5,10 +5,10 @@ import axios from 'axios'
 const AddVisitor = () => {
     const [input, changeInput] = useState(
         {
-            "firstname": "",
-            "lastname": "",
-            "purpose": "",
-            "whomToMeet": ""
+            firstname: "",
+            lastname: "",
+            purpose: "",
+            whomToMeet: ""
         }
     )
     const inputHandler = (event) => {
@@ -16,9 +16,13 @@ const AddVisitor = () => {
     }
     const readValues = () => {
         console.log(input)
-        axios.post("http://172.16.12.153:4000/addVisitor",input).then(
+        axios.post("",input).then(
             (response) => {
-                alert("Successfully Added")
+                if (response.data.status==="success") {
+                    alert("Successfully Added") 
+                } else {
+                   alert("Error!!") 
+                }             
             }
         ).catch()
     }
